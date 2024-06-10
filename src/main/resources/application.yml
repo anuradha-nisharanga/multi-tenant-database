@@ -1,0 +1,29 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /
+
+app:
+    base_url: http://localhost:8080
+
+spring:
+    application:
+        name: Test
+    datasource:
+        url: jdbc:postgresql://127.0.0.1:5432/multi_tenant_V1?ApplicationName=Test
+        driver-class-name: org.postgresql.Driver
+        username: postgres
+        password: 1234
+
+        jpa:
+            properties:
+              hibernate:
+                hbm2ddl:
+                    auto: none
+#                search:
+#                    backend:
+#                        multi_tenancy:
+#                            strategy: discriminator
+
+    main:
+        allow-circular-references: true
