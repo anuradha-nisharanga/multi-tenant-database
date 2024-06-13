@@ -12,7 +12,7 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("interceptor class calling");
-        String requestURI = request.getRequestURI();
+//        String requestURI = request.getRequestURI();
         String tenantID = request.getHeader("X-TenantID");
         log.info("Tenant ID : {}",tenantID);
         if (tenantID == null) {

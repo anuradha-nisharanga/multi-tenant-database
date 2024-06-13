@@ -2,6 +2,7 @@ package com.sample.Test.service.impl;
 
 import com.sample.Test.config.TenantDataSource;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTenantConnectionProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -11,9 +12,11 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 @Component
+@Slf4j
 public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
 
-    private static final String DEFAULT_TENANT_ID = "tenant_1_V1";
+    //    tenant_1_V1
+    private static final String DEFAULT_TENANT_ID = "multi_tenant_V1";
 
     @Autowired
     private DataSource defaultDS;
@@ -38,6 +41,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
     @Override
     protected DataSource selectDataSource(Object tenantIdentifier) {
         if (!init) {
+            log.info("calling select Data Source");
             init = true;
             TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
             map.putAll(tenantDataSource.getAll());

@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class TenantSchemaResolver implements CurrentTenantIdentifierResolver {
-
-    private String defaultTenant ="public";
+//    public
+    public static final String defaultTenant ="public";
 
     @Override
     public String resolveCurrentTenantIdentifier() {
+        log.info("calling resolveCurrent Tenant Identifier");
         String tenant = TenantContext.getCurrentTenant();
         if (tenant != null){
             log.info("TenantSchemaResolver:{}",tenant);
@@ -25,6 +26,7 @@ public class TenantSchemaResolver implements CurrentTenantIdentifierResolver {
 
     @Override
     public boolean validateExistingCurrentSessions() {
+        log.info("calling validateExistingCurrentSessions in tenant schema resolver");
         return true;
     }
 }
