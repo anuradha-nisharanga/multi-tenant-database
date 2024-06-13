@@ -1,5 +1,6 @@
 package com.sample.Test.service.impl;
 
+import com.sample.Test.Interceptor.TenantContext;
 import com.sample.Test.config.TenantDataSource;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +16,6 @@ import java.util.Map;
 @Slf4j
 public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
 
-    //    tenant_1_V1
-    private static final String DEFAULT_TENANT_ID = "multi_tenant_V1";
-
     @Autowired
     private DataSource defaultDS;
 
@@ -30,12 +28,12 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
 
     @PostConstruct
     public void load() {
-        map.put(DEFAULT_TENANT_ID, defaultDS);
+        map.put(TenantContext.DEFAULT_TENANT_ID, defaultDS);
     }
 
     @Override
     protected DataSource selectAnyDataSource() {
-        return map.get(DEFAULT_TENANT_ID);
+        return map.get(TenantContext.DEFAULT_TENANT_ID);
     }
 
     @Override
@@ -46,6 +44,6 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
             TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
             map.putAll(tenantDataSource.getAll());
         }
-        return map.get(tenantIdentifier) != null ? map.get(tenantIdentifier) : map.get(DEFAULT_TENANT_ID);
+        return map.get(tenantIdentifier) != null ? map.get(tenantIdentifier) : map.get(TenantContext.DEFAULT_TENANT_ID);
     }
 }

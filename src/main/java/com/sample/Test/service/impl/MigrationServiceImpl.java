@@ -25,21 +25,21 @@ public class MigrationServiceImpl implements MigrationService {
 
     @Override
     public void addMigrationFile() {
-        log.info("schema create serviceImpl class called");
-        String tenant = TenantContext.getCurrentTenant();
-        DataSourceConfig config = dataSourceConfigRepository.findByName(tenant);
-        log.info("config details {} | tenant details {} ", config, tenant);
-        if (config != null) {
-            String scriptLocation = "db/migration/";
-            Flyway flyway = Flyway.configure()
-                    .locations(scriptLocation)
-                    .baselineOnMigrate(Boolean.TRUE)
-                    .dataSource(config.getUrl(), config.getUsername(), config.getPassword())
-                    .schemas("public")
-                    .load();
-            flyway.migrate();
-            log.info("flyway details {}", flyway);
-        }
+//        log.info("schema create serviceImpl class called");
+//        String tenant = TenantContext.getCurrentTenant();
+//        DataSourceConfig config = dataSourceConfigRepository.findByName(tenant);
+//        log.info("config details {} | tenant details {} ", config, tenant);
+//        if (config != null) {
+//            String scriptLocation = "db/migration/";
+//            Flyway flyway = Flyway.configure()
+//                    .locations(scriptLocation)
+//                    .baselineOnMigrate(Boolean.TRUE)
+//                    .dataSource(config.getUrl(), config.getUsername(), config.getPassword())
+//                    .schemas("public")
+//                    .load();
+//            flyway.migrate();
+//            log.info("flyway details {}", flyway);
+//        }
     }
 
     @Override

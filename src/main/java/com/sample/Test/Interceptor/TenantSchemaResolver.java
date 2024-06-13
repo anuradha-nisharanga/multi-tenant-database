@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class TenantSchemaResolver implements CurrentTenantIdentifierResolver {
-//    public
-    public static final String defaultTenant ="public";
 
     @Override
     public String resolveCurrentTenantIdentifier() {
@@ -20,7 +18,7 @@ public class TenantSchemaResolver implements CurrentTenantIdentifierResolver {
         }
         else {
             log.info("TenantSchemaResolver Default tenant:{}",tenant);
-            return defaultTenant;
+            return TenantContext.DEFAULT_TENANT_ID;
         }
     }
 
